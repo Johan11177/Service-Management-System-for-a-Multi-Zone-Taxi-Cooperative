@@ -1,5 +1,8 @@
 package pooproyect.operador;
 
-public class Operador {
+import java.util.ArrayList;
 
+public class Operador {
+ private ArrayList<Operador> operadores;
+ 
 }

@@ -1,5 +1,5 @@
-package pooproyect;
+package pooproyect.TipoDeServicio;
 
-public class Taxiestandar {
+public class TaxiEstandar extends TipoDeServicio {
 
 }
