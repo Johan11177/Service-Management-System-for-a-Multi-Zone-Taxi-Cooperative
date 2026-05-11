@@ -1,6 +1,6 @@
 package pooproyect.TipoDeServicio;
 
-public abstract class TipoDeServicio {
+public abstract class TaxiConBaul {
 
     double TarifaMinima = 5000;
     double CostoPorDistancia = 1500;//Costo por kilometro adicional 1500
