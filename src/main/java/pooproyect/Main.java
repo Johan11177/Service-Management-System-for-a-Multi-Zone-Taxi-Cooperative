@@ -11,7 +11,7 @@ public class Main {
         
         cola.agregarSolicitud(s1);
         System.out.println(s1);
-        
+        cola.atenderSolicitud();
         cola.cancelarSolicitud(1);
         System.out.println(s1);
         
