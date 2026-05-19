@@ -6,12 +6,14 @@ public class Conexiones {
     private Zonas destino;
     private boolean Habilitada;
     private int tiempoEstimado;
+    private double kiloMetros;
 
-    public Conexiones(Zonas origen, Zonas destino, boolean Habilitada, int tiempoEstimado) {
+    public Conexiones(Zonas origen, Zonas destino, boolean Habilitada, int tiempoEstimado, double kiloMetros) {
         this.origen = origen;
         this.destino = destino;
         this.Habilitada = Habilitada;
         this.tiempoEstimado = tiempoEstimado;
+        this.kiloMetros = kiloMetros;
     }
 
 
@@ -21,6 +23,11 @@ public class Conexiones {
 
     public Zonas getDestino() {
         return destino;
+    }
+
+    public double getKiloMetros() {
+        return kiloMetros;
+    }
     }
 
     public boolean isHabilitada() {
