@@ -44,7 +44,7 @@ public class GestorConexionesRutas {
                 gestorZonas.getZonas().get(3), // Universidad
                 gestorZonas.getZonas().get(4), // Mamatoco
                 true,
-                6));    
+                6));        
         }
 
         public ArrayList<Conexiones> getConexiones() {
