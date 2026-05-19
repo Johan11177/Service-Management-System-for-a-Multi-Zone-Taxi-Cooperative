@@ -49,7 +49,8 @@ public class InterfazConexionVial {
         origen--;
         destino--;
 
-        int[][] matriz = grafo.getMatriz();
+        int[][] matriz = grafo.getMatrizTiempo();
+        int [][] matrizKm = grafo.getMatrizKilometros();
 
         // BFS
         BFS bfs = new BFS(matriz);
@@ -58,14 +59,25 @@ public class InterfazConexionVial {
 
         if (existeCamino) {
             System.out.println("Hay Conexion Vial");
-            // DIJKSTRA
-            Dijkstra dijkstra = new Dijkstra(matriz);
-            int tiempo = dijkstra.calcularRutaMasCorta(origen, destino);
+            // DIJKSTRA TIEMPO
+            Dijkstra dijkstraTiempo = new Dijkstra(matriz);
+            int tiempo = dijkstraTiempo.calcularRutaMasCorta(origen, destino);
+            
 
             System.out.println("Tiempo estimado: "+ tiempo + " minutos");
 
+            // DIJKSTRA KILOMETROS
+            Dijkstra dijkstraKm = new Dijkstra(matrizKm);
+            int kilometro = dijkstraKm.calcularRutaMasCorta(origen, destino);
+            
+
+            System.out.println("kilometros estimados: "+ kilometro + " Kilometros");
+            
         } else {
             System.out.println("No hay Conexion Vial");
         }
+
+        
+        
     }
 }

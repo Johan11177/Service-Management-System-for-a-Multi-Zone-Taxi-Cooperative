@@ -23,6 +23,7 @@ public class Dijkstra {
 
         for (int i = 0; i < n - 1; i++) {
             int actual = obtenerNodoMenorDistancia(distancias, visitados);
+            
             visitados[actual] = true;
 
             for (int vecino = 0; vecino < n; vecino++) {

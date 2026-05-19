@@ -1,4 +1,4 @@
-package Conductores;
+package pooproyect.Conductores;
 
 public class Conductores {
     private String nombre;

@@ -1,7 +1,8 @@
 package pooproyect.Zona;
 
 public class Grafo {
-    private int[][] matriz;
+    private int[][] matrizTiempo;
+    private int[][] matrizKilometros;
     private GestorConexionesRutas rutas;
 
     public Grafo(GestorConexionesRutas rutas) {
@@ -11,25 +12,35 @@ public class Grafo {
 
     public void construirGrafo() {
         int tamaño = rutas.getGestorZonas().getZonas().size();
-        matriz = new int[tamaño][tamaño];
+        matrizTiempo = new int[tamaño][tamaño];
+        matrizKilometros = new int[tamaño][tamaño];
 
         for (Conexiones c : rutas.getConexiones()) {
             if (c.isHabilitada()) {
                 int origen = c.getOrigen().getIdZona();
                 int destino = c.getDestino().getIdZona();
-
-                matriz[origen][destino] = c.getTiempoEstimado();
+                // Matriz tiempo
+                matrizTiempo[origen][destino] = c.getTiempoEstimado();
                 int tiempo = c.getTiempoEstimado();
                 //Ida
-                matriz[origen][destino] = tiempo;
+                matrizTiempo[origen][destino] = tiempo;
+
                 //vuelta
-                matriz[destino][origen] = tiempo; 
+                matrizTiempo[destino][origen] = tiempo; 
+
+                // Matriz kilómetros
+                int kilometros = (int) c.getKiloMetros();
+                //Ida
+                matrizKilometros[origen][destino] = kilometros;
+                //vuelta
+                matrizKilometros[destino][origen] = kilometros;
 
 
             }
 
     }
 }
+
     //prueba 1 conexiones diresta, falta indirectas pediente...
     /*
      * public boolean hayConexion(int origen, int destino) {
@@ -46,9 +57,13 @@ public class Grafo {
      * }
      */
 
-    public int[][] getMatriz() {
-        return matriz;
-    }
+    public int[][] getMatrizTiempo() {
+    return matrizTiempo;
+}
+
+public int[][] getMatrizKilometros() {
+    return matrizKilometros;
+}
     
 }
 

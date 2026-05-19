@@ -16,7 +16,6 @@ public class Conexiones {
         this.kiloMetros = kiloMetros;
     }
 
-
     public Zonas getOrigen() {
         return origen;
     }
@@ -25,19 +24,15 @@ public class Conexiones {
         return destino;
     }
 
-    public double getKiloMetros() {
-        return kiloMetros;
-    }
-    }
-
     public boolean isHabilitada() {
         return Habilitada;
     }
 
-    public void setHabilitada(boolean Habilitada) {
-        this.Habilitada = Habilitada;
-    }
     public int getTiempoEstimado() {
         return tiempoEstimado;
+    }
+
+    public double getKiloMetros() {
+        return kiloMetros;
     }
 }

@@ -20,13 +20,13 @@ public class GestorConexionesRutas {
                 gestorZonas.getZonas().get(0), // Aeropuerto
                 gestorZonas.getZonas().get(1), // Rodadero
                 true,
-                15,8));
+                20,8));
 
         conexiones.add(new Conexiones(
                 gestorZonas.getZonas().get(1), // Rodadero
                 gestorZonas.getZonas().get(2), // Centro Histórico
                 true,
-                24, 6));
+                15, 7));
 
         conexiones.add(new Conexiones(
                 gestorZonas.getZonas().get(2), // Centro Histórico
@@ -38,13 +38,19 @@ public class GestorConexionesRutas {
                 gestorZonas.getZonas().get(2), // Centro Histórico
                 gestorZonas.getZonas().get(3), // Universidad
                 true,
-                10, 3.5));
+                19, 4));
 
         conexiones.add(new Conexiones(
                 gestorZonas.getZonas().get(3), // Universidad
                 gestorZonas.getZonas().get(4), // Mamatoco
                 true,
-                6,3));        
+                9,3));
+        
+        conexiones.add(new Conexiones(
+                gestorZonas.getZonas().get(4), // Mamatoco
+                gestorZonas.getZonas().get(5), // Taganga
+                true,
+                23, 10));
         }
 
         public ArrayList<Conexiones> getConexiones() {
