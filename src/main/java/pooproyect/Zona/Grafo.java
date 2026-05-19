@@ -1,7 +1,6 @@
 package pooproyect.Zona;
 
 public class Grafo {
-
     private int[][] matriz;
     private GestorConexionesRutas rutas;
 
@@ -18,18 +17,24 @@ public class Grafo {
             if (c.isHabilitada()) {
                 int origen = c.getOrigen().getIdZona();
                 int destino = c.getDestino().getIdZona();
-                matriz[origen][destino] = 1;
+
+                matriz[origen][destino] = c.getTiempoEstimado();
+                int tiempo = c.getTiempoEstimado();
+                //Ida
+                matriz[origen][destino] = tiempo;
+                //vuelta
+                matriz[destino][origen] = tiempo; 
+
 
             }
 
-        }
-
     }
-
+}
+    //prueba 1 conexiones diresta, falta indirectas pediente...
     /*
      * public boolean hayConexion(int origen, int destino) {
      * 
-     * boolean existeConexion = matriz[origen][destino] == 1;
+     * boolean existeConexion = matriz[origen][destino] != 0;
      * 
      * if (existeConexion) {
      * System.out.println("Hay conexion vial");
@@ -44,5 +49,6 @@ public class Grafo {
     public int[][] getMatriz() {
         return matriz;
     }
-
+    
 }
+
