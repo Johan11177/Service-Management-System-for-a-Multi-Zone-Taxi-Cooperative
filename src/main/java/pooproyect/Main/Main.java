@@ -1,4 +1,4 @@
-package pooproyect;
+package pooproyect.Main;
 
 import pooproyect.Solicitudes.SolicitudEnEspera;
 import pooproyect.Solicitudes.Solicitudes;
@@ -8,7 +8,10 @@ public class Main {
        //probrar que la cola funciona en el programa
          SolicitudEnEspera cola = new SolicitudEnEspera();
          Solicitudes s1 = new Solicitudes(1, "gaira", "centro", "Baul", "18:32", "20/20");
-        
+
+         SystemUI UI = new SystemUI();
+         UI.iniciar();
+         
         cola.agregarSolicitud(s1);
         System.out.println(s1);
         cola.atenderSolicitud();
