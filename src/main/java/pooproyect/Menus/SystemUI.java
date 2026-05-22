@@ -2,20 +2,23 @@ package pooproyect.Menus;
 
 import java.util.Scanner;
 
+import pooproyect.Usuario.GestorConductores;
 import pooproyect.Zona.GestorConexionesRutas;
 import pooproyect.Zona.GestorZonas;
 
 public class SystemUI {
 
     Scanner sc = new Scanner(System.in);
-
-    private GestorZonas gestorZonas;
+ 
+    private GestorConductores gestorConductores;
     private GestorConexionesRutas gestorConexiones;
+    private GestorZonas gestorZonas;
 
     public SystemUI() {
 
         gestorZonas = new GestorZonas();
         gestorConexiones = new GestorConexionesRutas(gestorZonas);
+        gestorConductores = new GestorConductores();
     }
 
     public void iniciar() {
@@ -28,7 +31,8 @@ public class SystemUI {
             System.out.println("===== SISTEMA PRINCIPAL ====");
             System.out.println("1. Conexion vial");
             System.out.println("2. Gestion De Red Vial");
-            System.out.println("3. Salir");
+            System.out.println("3. Gestion De Conductores");
+            System.out.println("4. Salir");
             System.out.println("");
 
             opcion = sc.nextInt();
@@ -48,12 +52,17 @@ public class SystemUI {
                 }
 
                 case 3 -> {
+                    MenuGestionConductores menuGestionConductores = new MenuGestionConductores(gestorConductores);
+                    menuGestionConductores.CrearMenu();
+                }
+
+                case 4 -> {
                     System.out.println("Saliendo del sistema...");
                 }
 
                 default -> System.out.println("Opcion invalida");
             }
 
-        } while (opcion != 3);
+        } while (opcion != 4);
     }
 }
