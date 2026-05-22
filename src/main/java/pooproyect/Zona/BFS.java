@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 //Breadth-First Search (Búsqueda en anchura)
 //derecho de uso exclusivo estudiantes del profesor capacho
+
 public class BFS {
 
     private int[][] matriz;

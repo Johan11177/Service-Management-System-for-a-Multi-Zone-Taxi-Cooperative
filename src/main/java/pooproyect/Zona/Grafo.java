@@ -7,6 +7,7 @@ public class Grafo {
 
     public Grafo(GestorConexionesRutas rutas) {
         this.rutas = rutas;
+        construirGrafo();
 
     }
 
@@ -20,11 +21,8 @@ public class Grafo {
                 int origen = c.getOrigen().getIdZona();
                 int destino = c.getDestino().getIdZona();
                 // Matriz tiempo
-                matrizTiempo[origen][destino] = c.getTiempoEstimado();
                 int tiempo = c.getTiempoEstimado();
-                //Ida
                 matrizTiempo[origen][destino] = tiempo;
-                //vuelta
                 matrizTiempo[destino][origen] = tiempo; 
 
                 // Matriz kilómetros

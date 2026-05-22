@@ -1,6 +1,13 @@
-package pooproyect.Zona;
+package pooproyect.Menus;
 
 import java.util.Scanner;
+
+import pooproyect.Zona.BFS;
+import pooproyect.Zona.Dijkstra;
+import pooproyect.Zona.GestorConexionesRutas;
+import pooproyect.Zona.GestorZonas;
+import pooproyect.Zona.Grafo;
+import pooproyect.Zona.Zonas;
 
 public class InterfazConexionVial {
     Scanner sc = new Scanner(System.in);
@@ -8,13 +15,10 @@ public class InterfazConexionVial {
     private GestorConexionesRutas rutas;
     private Grafo grafo;
 
-    public InterfazConexionVial() {
-        gestorZonas = new GestorZonas();
-        gestorZonas.agregarZonas();
-        rutas = new GestorConexionesRutas(gestorZonas);
-        rutas.agregarConexiones();
-        grafo = new Grafo(rutas);
-        grafo.construirGrafo();
+    public InterfazConexionVial(GestorZonas gestorZonas, GestorConexionesRutas rutas) {
+        this.gestorZonas = gestorZonas;
+        this.rutas = rutas;
+        this.grafo = new Grafo(rutas);
     }
 
     public void iniciar() {
@@ -50,7 +54,7 @@ public class InterfazConexionVial {
         destino--;
 
         int[][] matriz = grafo.getMatrizTiempo();
-        int [][] matrizKm = grafo.getMatrizKilometros();
+        int[][] matrizKm = grafo.getMatrizKilometros();
 
         // BFS
         BFS bfs = new BFS(matriz);
@@ -62,22 +66,18 @@ public class InterfazConexionVial {
             // DIJKSTRA TIEMPO
             Dijkstra dijkstraTiempo = new Dijkstra(matriz);
             int tiempo = dijkstraTiempo.calcularRutaMasCorta(origen, destino);
-            
 
-            System.out.println("Tiempo estimado: "+ tiempo + " minutos");
+            System.out.println("Tiempo estimado: " + tiempo + " minutos");
 
             // DIJKSTRA KILOMETROS
             Dijkstra dijkstraKm = new Dijkstra(matrizKm);
             int kilometro = dijkstraKm.calcularRutaMasCorta(origen, destino);
-            
 
-            System.out.println("kilometros estimados: "+ kilometro + " Kilometros");
-            
+            System.out.println("kilometros estimados: " + kilometro + " Kilometros");
+
         } else {
             System.out.println("No hay Conexion Vial");
         }
 
-        
-        
     }
 }

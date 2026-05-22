@@ -16,6 +16,9 @@ public class Conexiones {
         this.kiloMetros = kiloMetros;
     }
 
+    public Conexiones() {
+    }
+
     public Zonas getOrigen() {
         return origen;
     }
@@ -34,5 +37,9 @@ public class Conexiones {
 
     public double getKiloMetros() {
         return kiloMetros;
+    }
+
+    public void setHabilitada(boolean Habilitada) {
+        this.Habilitada = Habilitada;
     }
 }

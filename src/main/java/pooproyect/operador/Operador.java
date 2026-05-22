@@ -41,6 +41,14 @@ public class Operador {
         return lista;
 
     }
+
+    public void HabilitarConexion(){
+        this.disponible = true;
+    }
+
+    public void DeshabilitarConexion(){
+        this.disponible = false;
+    }
  }
  
 
