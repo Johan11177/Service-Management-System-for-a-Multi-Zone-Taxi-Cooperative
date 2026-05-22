@@ -6,13 +6,15 @@ public class TarifaBaul implements Tarifa {
     private Dijkstra dijkstra;
     private double CostoBase = 5000;
     private double CostoPorKm = 1000;
-    private double CostoAdicionalBaul = 2000; 
+    private double CostoAdicionalBaul = 2000;
+    private double Costofinal; 
 
     public TarifaBaul(Dijkstra dijkstra, double costoBase, double costoPorKm, double costoAdicionalBaul) {
         this.dijkstra = dijkstra;
         CostoBase = costoBase;
         CostoPorKm = costoPorKm;
         CostoAdicionalBaul = costoAdicionalBaul;
+        Costofinal = CostoBase + CostoAdicionalBaul;
     }
 
     public TarifaBaul() {
@@ -23,8 +25,12 @@ public class TarifaBaul implements Tarifa {
         System.out.println("Calculando tarifa para baúl");
 
         int km = dijkstra.calcularRutaMasCorta(origen, destino);
-        return CostoBase + (km * CostoPorKm) + CostoAdicionalBaul; 
-
+        Costofinal = CostoBase + (km * CostoPorKm) + CostoAdicionalBaul;
+        return Costofinal;
     }
 
 }
+        
+
+
+

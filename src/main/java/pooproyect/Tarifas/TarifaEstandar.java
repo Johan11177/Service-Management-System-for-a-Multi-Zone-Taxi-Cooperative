@@ -6,11 +6,13 @@ public class TarifaEstandar implements Tarifa {
     private Dijkstra dijkstra;
     private double CostoBase = 5000;
     private double CostoPorKm = 1000;
+    private double Costofinal;
 
     public TarifaEstandar(Dijkstra dijkstra, double costoBase, double costoPorKm) {
         this.dijkstra = dijkstra;
         CostoBase = costoBase;
         CostoPorKm = costoPorKm;
+        Costofinal = CostoBase;
     }
 
     public TarifaEstandar() {
@@ -20,7 +22,8 @@ public class TarifaEstandar implements Tarifa {
     public double CalcularTarifa(int origen, int destino) {
         int Km = dijkstra.calcularRutaMasCorta(origen, destino);
         System.out.println("Calculando tarifa estándar");
-        return CostoBase + (Km * CostoPorKm); 
+        Costofinal = CostoBase + (Km * CostoPorKm);
+        return Costofinal;
     }
 
 }

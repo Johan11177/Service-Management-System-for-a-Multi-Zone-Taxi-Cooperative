@@ -25,7 +25,8 @@ public TarifaMascotas() {
         System.out.println("Calculando tarifa para mascotas");
 
         int km = dijkstra.calcularRutaMasCorta(origen, destino);
-        return Costofinal =(km * CostoPorKm); 
+        Costofinal = (km * CostoPorKm);
+        return Costofinal;
     }
 
 }
