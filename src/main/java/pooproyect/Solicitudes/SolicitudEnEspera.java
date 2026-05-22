@@ -49,4 +49,13 @@ public class SolicitudEnEspera {
 
         System.out.println("No se encontro la solicitud");
     }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
+    public ArrayList<Solicitudes> getCola() {
+        return cola;
+    }
+    
 }
