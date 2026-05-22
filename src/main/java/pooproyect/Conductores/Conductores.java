@@ -2,33 +2,33 @@ package pooproyect.Conductores;
 
 import java.util.ArrayList;
 
-import pooproyect.Servicio.Servicio;
+import pooproyect.TipoDeServicio.Taxi;
 
 public class Conductores {
 
     private String nombre;
     private boolean disponible;
 
-    private ArrayList<Servicio> servicios;
+    private ArrayList<Taxi> servicios;
 
     public Conductores(String nombre) {
 
         this.nombre = nombre;
         this.disponible = true;
 
-        servicios = new ArrayList<>();
+        this.servicios = new ArrayList<>();
     }
 
-    public void agregarServicio(Servicio servicio) {
+    public void agregarServicio(Taxi servicio) {
 
         servicios.add(servicio);
     }
 
     public boolean puedeAtender(String tipoServicio) {
 
-        for (Servicio servicio : servicios) {
+        for (Taxi servicio : servicios) {
 
-            if (servicio.getNombre()
+            if (servicio.getTipoServicio()
                     .equalsIgnoreCase(tipoServicio)) {
 
                 return true;
@@ -49,26 +49,28 @@ public class Conductores {
     }
 
     public String getNombre() {
+
         return nombre;
     }
 
     public boolean isDisponible() {
+
         return disponible;
     }
 
-    public ArrayList<Servicio> getServicios() {
+    public ArrayList<Taxi> getServicios() {
+
         return servicios;
     }
-    
 
     @Override
     public String toString() {
 
         String texto = "";
 
-        for (Servicio servicio : servicios) {
+        for (Taxi servicio : servicios) {
 
-            texto += servicio.getNombre() + " ";
+            texto += servicio.getTipoServicio() + " ";
         }
 
         return "Conductor: " + nombre +
