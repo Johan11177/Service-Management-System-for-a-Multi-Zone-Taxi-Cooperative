@@ -1,5 +1,6 @@
 package pooproyect.Tarifas;
 
-public class Tarifa {
-
+public interface Tarifa {
+    
+    double CalcularTarifa(int origen, int destino);
 }

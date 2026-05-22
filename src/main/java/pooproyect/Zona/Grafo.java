@@ -24,7 +24,6 @@ public class Grafo {
                 int tiempo = c.getTiempoEstimado();
                 //Ida
                 matrizTiempo[origen][destino] = tiempo;
-
                 //vuelta
                 matrizTiempo[destino][origen] = tiempo; 
 
