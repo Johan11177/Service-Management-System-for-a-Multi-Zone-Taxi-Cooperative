@@ -1,6 +1,6 @@
 package pooproyect.Usuario;
 
-public abstract class Usuario {
+public class Usuario {
 
 private String nombre;
 private String ID;
