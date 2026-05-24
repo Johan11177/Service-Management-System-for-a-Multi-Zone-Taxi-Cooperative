@@ -25,11 +25,7 @@ public class InterfazConexionVial {
         int origen;
         int destino;
 
-        System.out.println("===== CONEXIONES VIALES =====");
-
-        for (Zonas z : gestorZonas.getZonas()) {
-            System.out.println((z.getIdZona() + 1) + ". " + z.getNombreZona());
-        }
+       
 
         // ORIGEN
         System.out.print("Seleccione origen: ");

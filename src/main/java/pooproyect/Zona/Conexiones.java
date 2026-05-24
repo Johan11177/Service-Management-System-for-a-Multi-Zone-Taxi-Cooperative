@@ -4,6 +4,8 @@ public class Conexiones {
 
     private Zonas origen;
     private Zonas destino;
+    private int idOrigen;
+    private int idDestino;
     private boolean Habilitada;
     private int tiempoEstimado;
     private double kiloMetros;
@@ -16,30 +18,66 @@ public class Conexiones {
         this.kiloMetros = kiloMetros;
     }
 
-    public Conexiones() {
+    public Conexiones(int idOrigen, int idDestino) {
+        this.idOrigen = idOrigen;
+        this.idDestino = idDestino;
     }
 
     public Zonas getOrigen() {
         return origen;
     }
 
+    public void setOrigen(Zonas origen) {
+        this.origen = origen;
+    }
+
     public Zonas getDestino() {
         return destino;
+    }
+
+    public void setDestino(Zonas destino) {
+        this.destino = destino;
+    }
+
+    public int getIdOrigen() {
+        return idOrigen;
+    }
+
+    public void setIdOrigen(int idOrigen) {
+        this.idOrigen = idOrigen;
+    }
+
+    public int getIdDestino() {
+        return idDestino;
+    }
+
+    public void setIdDestino(int idDestino) {
+        this.idDestino = idDestino;
     }
 
     public boolean isHabilitada() {
         return Habilitada;
     }
 
+    public void setHabilitada(boolean habilitada) {
+        Habilitada = habilitada;
+    }
+
     public int getTiempoEstimado() {
         return tiempoEstimado;
+    }
+
+    public void setTiempoEstimado(int tiempoEstimado) {
+        this.tiempoEstimado = tiempoEstimado;
     }
 
     public double getKiloMetros() {
         return kiloMetros;
     }
 
-    public void setHabilitada(boolean Habilitada) {
-        this.Habilitada = Habilitada;
+    public void setKiloMetros(double kiloMetros) {
+        this.kiloMetros = kiloMetros;
     }
+
+    
 }

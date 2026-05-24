@@ -5,6 +5,7 @@ import pooproyect.Usuario.Conductor;
 import pooproyect.Solicitudes.SolicitudEnEspera;
 import java.util.ArrayList;
 public class Operador {
+    
     private String nombre;
     private int id;
     private boolean disponible;
