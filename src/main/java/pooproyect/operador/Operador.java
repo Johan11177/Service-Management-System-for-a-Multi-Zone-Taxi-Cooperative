@@ -43,13 +43,15 @@ public class Operador {
         return lista;
 
     }
-
-    public void HabilitarConexion(){
-        this.disponible = true;
-    }
-
-    public void DeshabilitarConexion(){
-        this.disponible = false;
-    }
+        public void AgregarConductor(Conductor conductor) {
+            for (int i = 0; i < conductores.length; i++) {
+                if (conductores[i] == null) {
+                    conductores[i] = conductor;
+                    System.out.println("Conductor agregado: " + conductor.getNombre());
+                    return;
+                }
+            }
+            System.out.println("No se pueden agregar más conductores. Capacidad máxima alcanzada.");
+        }
  }
  
