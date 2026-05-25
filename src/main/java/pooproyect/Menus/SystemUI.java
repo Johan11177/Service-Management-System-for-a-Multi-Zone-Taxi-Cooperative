@@ -2,6 +2,8 @@ package pooproyect.Menus;
 
 import java.util.Scanner;
 
+import pooproyect.Solicitudes.CrearSolicitud;
+
 public class SystemUI {
     Scanner sc = new Scanner(System.in);
     private MenuOperedores menuOperadores;
@@ -11,12 +13,9 @@ public class SystemUI {
     public SystemUI(MenuOperedores menuOperadores, MenuConductores menuConductores, MenuCliente menuCliente) {
         this.menuOperadores = new MenuOperedores();
         this.menuConductores = new MenuConductores();
-        this.menuCliente = new menuCliente();
+        this.menuCliente = new MenuCliente(new CrearSolicitud(null, null, null));
     }
 
-     public SystemUI() {
-        
-    }
 
     public void iniciar() {
         
