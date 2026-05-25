@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class PersistenciaConductores {
-
+//maicol mete el txt en la carpeta conductores para que este mejor organizado
     private static final String ARCHIVO = "conductores.txt";
 
     public static void guardar(ArrayList<Conductor> conductores) {
@@ -60,9 +60,9 @@ public class PersistenciaConductores {
                     String[] servicios = datos[4].split(",");
                     for (String tipo : servicios) {
                         switch (tipo.trim()) {
-                            case "Estandar"             -> c.agregarServicio(new TaxiEstandar());
-                            case "Con Baul"             -> c.agregarServicio(new TaxiConBaul());
-                            case "Transporte Mascotas"  -> c.agregarServicio(new TaxiTransporteMascotas());
+                            case "Taxi Estandar"             -> c.agregarServicio(new TaxiEstandar());
+                            case "Taxi con Baul"             -> c.agregarServicio(new TaxiConBaul());
+                            case "Taxi Transporte Mascotas"  -> c.agregarServicio(new TaxiTransporteMascotas());
                         }
                     }
                 }
