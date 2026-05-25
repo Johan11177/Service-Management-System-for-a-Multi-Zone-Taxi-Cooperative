@@ -2,19 +2,37 @@ package pooproyect.Menus;
 
 import java.util.Scanner;
 import pooproyect.Main.EntradaUsuario;
+import pooproyect.Menus.MenuOperadores.MenuGestionConductores;
+import pooproyect.Menus.MenuOperadores.MenuGestionVial;
 import pooproyect.Menus.MenuOperadores.MenuOperedores;
+import pooproyect.Solicitudes.CrearSolicitud;
+import pooproyect.Usuario.Cliente;
+import pooproyect.Usuario.GestorConductores;
+import pooproyect.Zona.Conexiones;
+import pooproyect.Zona.GestorConexionesRutas;
+import pooproyect.Zona.GestorZonas;
 
 public class SystemUI {
+
     private Scanner sc = EntradaUsuario.get();
     private MenuOperedores menuOperadores;
     private MenuConductores menuConductores;
     private MenuCliente menuCliente;
-    
-    public SystemUI(MenuOperedores menuOperadores, MenuConductores menuConductores, MenuCliente menuCliente) {
-        this.menuOperadores = menuOperadores;
-        this.menuConductores = menuConductores;
-        this.menuCliente = menuCliente;
-    }
+
+   public SystemUI() {
+    GestorZonas gestorZonas = new GestorZonas();
+    GestorConexionesRutas gestorConexiones = new GestorConexionesRutas(gestorZonas);
+    Cliente cliente = new Cliente("", "CLI-1");
+    Conexiones conexiones = new Conexiones(0, 0);
+    CrearSolicitud crearSolicitud = new CrearSolicitud(conexiones, gestorZonas, cliente);
+
+    MenuGestionVial menuGesVial = new MenuGestionVial(gestorZonas, gestorConexiones);
+    MenuGestionConductores menuGesConductores = new MenuGestionConductores(new GestorConductores());
+
+    this.menuOperadores = new MenuOperedores(menuGesVial, menuGesConductores);
+    this.menuConductores = new MenuConductores();
+    this.menuCliente = new MenuCliente(crearSolicitud);
+}
 
     public void iniciar() {
         int opcion;

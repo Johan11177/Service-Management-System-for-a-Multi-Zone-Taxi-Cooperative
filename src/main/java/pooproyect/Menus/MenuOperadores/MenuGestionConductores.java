@@ -1,7 +1,8 @@
-package pooproyect.Menus;
+package pooproyect.Menus.MenuOperadores;
 
 import java.util.Scanner;
 import pooproyect.Main.EntradaUsuario;
+import pooproyect.Menus.InterfaceMenu;
 import pooproyect.Usuario.GestorConductores;
 
 public class MenuGestionConductores implements InterfaceMenu {
@@ -28,6 +29,7 @@ public class MenuGestionConductores implements InterfaceMenu {
             System.out.println("Seleccione una opcion:");
 
             op = sc.nextInt();
+            sc.nextLine();
             switch (op) {
                 case 1 -> {
                     gestorConductores.agregarConductor();
@@ -36,6 +38,7 @@ public class MenuGestionConductores implements InterfaceMenu {
                     gestorConductores.MostrarConductores();
                 }
                 case 3 -> {
+                    gestorConductores.habilitarServicioConductor();
                 }
                 case 4 -> {
                     System.out.println("Volviendo...");

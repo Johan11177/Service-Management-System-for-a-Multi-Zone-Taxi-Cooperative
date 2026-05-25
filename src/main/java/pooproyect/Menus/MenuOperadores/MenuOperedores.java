@@ -6,6 +6,13 @@ import pooproyect.Menus.InterfaceMenu;
 
 public class MenuOperedores implements InterfaceMenu {
     private Scanner sc = EntradaUsuario.get();
+    private MenuGestionVial menuGesVial;
+    private MenuGestionConductores menuGesConductores;
+
+    public MenuOperedores(MenuGestionVial menuGesVial, MenuGestionConductores menuGesConductores) {
+        this.menuGesVial = menuGesVial;
+        this.menuGesConductores = menuGesConductores;
+    }
 
     @Override
     public void CrearMenu() {
@@ -42,8 +49,10 @@ public class MenuOperedores implements InterfaceMenu {
                 case 6 -> {
                 }
                 case 7 -> {
+                    menuGesConductores.CrearMenu();
                 }
                 case 8 -> {
+                    menuGesVial.CrearMenu();
                 }
                 case 9 -> {
                     System.out.println("Volviendo...");

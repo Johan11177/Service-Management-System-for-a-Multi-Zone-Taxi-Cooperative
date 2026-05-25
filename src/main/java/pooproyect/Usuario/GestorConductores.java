@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import pooproyect.Main.EntradaUsuario;
-import pooproyect.TipoDeServicio.Taxi;
+import pooproyect.TipoDeServicio.TaxiConBaul;
+import pooproyect.TipoDeServicio.TaxiEstandar;
+import pooproyect.TipoDeServicio.TaxiTransporteMascotas;
 import pooproyect.Vehiculo.Vehiculo;
 
 public class GestorConductores {
     private Scanner sc = EntradaUsuario.get();
 
     private boolean disponible;
-    private ArrayList<Taxi> servicios;
     private ArrayList<Conductor> conductores;
 
     public GestorConductores() {
         this.disponible = true;
-        this.servicios = new ArrayList<>();
         this.conductores = new ArrayList<>();
-    }
-
-    public void agregarServicio(Taxi servicio) {
-        servicios.add(servicio);
     }
 
     public void agregarConductor() {
@@ -46,14 +42,46 @@ public class GestorConductores {
         }
     }
 
-    public boolean puedeAtender(String tipoServicio) {
-        for (Taxi servicio : servicios) {
-            if (servicio.getTipoServicio().equalsIgnoreCase(tipoServicio)) {
-                return true;
-            }
+    public void habilitarServicioConductor() {
+        if (conductores.isEmpty()) {
+            System.out.println("No hay conductores registrados.");
+            return;
         }
-        return false;
+
+        MostrarConductores();
+        System.out.println("Seleccione el numero del conductor:");
+        int indice = sc.nextInt();
+        sc.nextLine();
+
+        if (indice < 1 || indice > conductores.size()) {
+            System.out.println("Indice invalido.");
+            return;
+        }
+
+        Conductor conductor = conductores.get(indice - 1);
+
+        System.out.println("1. Taxi Estandar");
+        System.out.println("2. Taxi con Baul");
+        System.out.println("3. Taxi Transporte Mascotas");
+        System.out.println("Seleccione el tipo de servicio:");
+
+        int tipo = sc.nextInt();
+        sc.nextLine();
+
+        if (tipo == 1) {
+            conductor.agregarServicio(new TaxiEstandar());
+        } else if (tipo == 2) {
+            conductor.agregarServicio(new TaxiConBaul());
+        } else if (tipo == 3) {
+            conductor.agregarServicio(new TaxiTransporteMascotas());
+        } else {
+            System.out.println("Opcion invalida");
+            return;
+        }
+
+        System.out.println("Servicio asignado correctamente.");
     }
+
 
     public void ocuparConductor() {
         disponible = false;
@@ -67,15 +95,13 @@ public class GestorConductores {
         return conductores;
     }
 
-    public ArrayList<Taxi> getServicios() {
-        return servicios;
-    }
-
+ 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Conductor c : conductores) {
             sb.append("ID: ").append(c.getID()).append(", Nombre: ").append(c.getNombre())
-                    .append(", Vehículo: ").append(c.getVehiculo().getMarca()).append(" - ").append(c.getVehiculo().getPlaca())
+                    .append(", Vehículo: ").append(c.getVehiculo().getMarca()).append(" - ")
+                    .append(c.getVehiculo().getPlaca())
                     .append(", Disponible: ").append(disponible ? "Sí" : "No").append("\n");
         }
         return sb.toString();
