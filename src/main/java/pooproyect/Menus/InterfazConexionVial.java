@@ -38,7 +38,8 @@ public class InterfazConexionVial {
         while (destino < 1 || destino > gestorZonas.getZonas().size()) {
             System.out.println("Ingrese una opcion correcta");
             destino = sc.nextInt();
-        }
+
+        }//💀ayuda, no me compila el cerebro
 
         origen--;
         destino--;
