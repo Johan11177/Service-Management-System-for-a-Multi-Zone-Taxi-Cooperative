@@ -1,8 +1,9 @@
-package pooproyect.Usuario;
+package pooproyect.Conductores;
 
 import java.util.ArrayList;
 
 import pooproyect.TipoDeServicio.Taxi;
+import pooproyect.Usuario.Usuario;
 import pooproyect.Vehiculo.Vehiculo;
 
 public class Conductor extends Usuario {
@@ -12,7 +13,7 @@ public class Conductor extends Usuario {
 
     public Conductor(String nombre, String ID, Vehiculo vehiculo) {
         super(nombre, ID);
-        this.vehiculo = new Vehiculo(vehiculo.getPlaca(), vehiculo.getMarca());
+        this.vehiculo = new Vehiculo(vehiculo.getMarca(), vehiculo.getPlaca());
         this.disponible = true;
         this.servicios = new ArrayList<>();
     }

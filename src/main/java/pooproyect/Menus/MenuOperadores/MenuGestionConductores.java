@@ -1,9 +1,10 @@
 package pooproyect.Menus.MenuOperadores;
 
 import java.util.Scanner;
+
+import pooproyect.Conductores.GestorConductores;
 import pooproyect.Main.EntradaUsuario;
 import pooproyect.Menus.InterfaceMenu;
-import pooproyect.Usuario.GestorConductores;
 
 public class MenuGestionConductores implements InterfaceMenu {
     private GestorConductores gestorConductores;

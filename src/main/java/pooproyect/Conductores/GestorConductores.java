@@ -1,8 +1,7 @@
-package pooproyect.Usuario;
+package pooproyect.Conductores;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import pooproyect.Main.EntradaUsuario;
 import pooproyect.TipoDeServicio.TaxiConBaul;
 import pooproyect.TipoDeServicio.TaxiEstandar;
@@ -11,6 +10,7 @@ import pooproyect.Vehiculo.Vehiculo;
 
 public class GestorConductores {
     private Scanner sc = EntradaUsuario.get();
+    
 
     private boolean disponible;
     private ArrayList<Conductor> conductores;
@@ -18,6 +18,7 @@ public class GestorConductores {
     public GestorConductores() {
         this.disponible = true;
         this.conductores = new ArrayList<>();
+        this.conductores = PersistenciaConductores.cargar(); 
     }
 
     public void agregarConductor() {
@@ -34,6 +35,7 @@ public class GestorConductores {
 
         conductores.add(new Conductor(nombre, idGenerado, new Vehiculo(marca, placa)));
         System.out.println("Conductor registrado con ID: " + idGenerado);
+        PersistenciaConductores.guardar(conductores);
     }
 
     public void MostrarConductores() {

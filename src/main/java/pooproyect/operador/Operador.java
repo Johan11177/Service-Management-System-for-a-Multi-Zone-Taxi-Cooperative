@@ -1,7 +1,7 @@
 package pooproyect.operador;
 
 import pooproyect.Solicitudes.Solicitudes;
-import pooproyect.Usuario.Conductor;
+import pooproyect.Conductores.Conductor;
 import pooproyect.Solicitudes.SolicitudEnEspera;
 import java.util.ArrayList;
 
