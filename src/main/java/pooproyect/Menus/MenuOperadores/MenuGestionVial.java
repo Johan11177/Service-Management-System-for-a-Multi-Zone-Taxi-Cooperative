@@ -22,6 +22,7 @@ public class MenuGestionVial implements InterfaceMenu {
         boolean volver = false;
 
         while (!volver) {
+            System.out.println("\n");
             System.out.println("==Gestion De Red vial==");
             System.out.println("");
             System.out.println("1. Ver Zonas");
@@ -34,19 +35,21 @@ public class MenuGestionVial implements InterfaceMenu {
             op = sc.nextInt();
             switch (op) {
                 case 1 -> {
+                    System.out.println("");
                     gestorZonas.MostrarZonas();
 
                 }
                 case 2 -> {
+                    System.out.println("");
                     gestorConexiones.MostrarConexiones();
                 }
                 case 3 -> {
+                    System.out.println("");
                     gestorConexiones.HabilitarDeshabilitarConexion();
                 }
                 case 4 -> {
                     System.out.println("Volviendo...");
                     volver = true;
-                    System.out.println("");
                 }
                 default -> System.out.println("Opcion invalida");
             }

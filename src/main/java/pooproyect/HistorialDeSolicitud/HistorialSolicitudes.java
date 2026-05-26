@@ -1,16 +1,32 @@
 package pooproyect.HistorialDeSolicitud;
 
+import java.util.ArrayList;
+
 public class HistorialSolicitudes {
-/*
-System.out.println("--Registro de solicitudes--");
-System.out.println("Historial de solicitudes:");
-System.out.println("Estado final: " + soEstadoFinal);
-System.out.println("Conductor asignado: " + ConfuctorAsignado);
-System.out.println("Tiempos de servicio: " + TiemposdeServicio);
-System.out.println("Tarifa final: " + TarifaFinal);
+    private ArrayList<RegistroHistorial> registros;
 
-*/
+    public HistorialSolicitudes() {
+        registros = new ArrayList<>();
+    }
 
-/*Nota: Guardar en archivo Txt o guardar
-aplicando recurrencia(tema no dado)  */
+    public void agregarRegistro(RegistroHistorial registro) {
+        registros.add(registro);
+    }
+
+    public void mostrarHistorial() {
+        if (registros.isEmpty()) {
+            System.out.println("No hay registros en el historial.");
+            return;
+        }
+
+        System.out.println("\n=== HISTORIAL DE SOLICITUDES ATENDIDAS ===");
+        for (RegistroHistorial r : registros) {
+            System.out.println(r);
+            System.out.println("---");
+        }
+    }
+
+    public ArrayList<RegistroHistorial> getRegistros() {
+        return registros;
+    }
 }

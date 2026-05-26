@@ -1,4 +1,5 @@
 Samuel ;C-1;chevrolet;c12;
 Michael ;C-2;Toyota;c1ksdksk2;
 Michael ;C-3;ferrari;c13;
-
+johan;C-4;sdsd;wewew;
+lubo;C-5;motorola;chatgpt-sds;

@@ -20,6 +20,7 @@ public class MenuGestionConductores implements InterfaceMenu {
         boolean volver = false;
 
         while (!volver) {
+            System.out.println("\n");
             System.out.println("==Gestion De Conductores==");
             System.out.println("");
             System.out.println("1. agregar Conductor");
@@ -44,7 +45,6 @@ public class MenuGestionConductores implements InterfaceMenu {
                 case 4 -> {
                     System.out.println("Volviendo...");
                     volver = true;
-                    System.out.println("");
                 }
                 default -> System.out.println("Opcion invalida");
             }

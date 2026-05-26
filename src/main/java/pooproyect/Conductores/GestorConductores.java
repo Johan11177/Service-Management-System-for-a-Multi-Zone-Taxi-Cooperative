@@ -93,6 +93,27 @@ public class GestorConductores {
         disponible = true;
     }
 
+    public Conductor encontrarConductorDisponible(String tipoServicio) {
+        for (Conductor conductor : conductores) {
+            if (conductor.isDisponible() && conductor.puedeAtender(tipoServicio)) {
+                return conductor;
+            }
+        }
+        return null;
+    }
+
+    public boolean finalizarServicioConductor(String idConductor) {
+        for (Conductor conductor : conductores) {
+            if (conductor.getID().equalsIgnoreCase(idConductor)) {
+                conductor.setDisponible(true);
+                System.out.println("Servicio finalizado. El conductor " + conductor.getNombre() + " ya está disponible.");
+                return true;
+            }
+        }
+        System.out.println("No se encontró un conductor con ID " + idConductor + ".");
+        return false;
+    }
+
     public ArrayList<Conductor> getConductores() {
         return conductores;
     }

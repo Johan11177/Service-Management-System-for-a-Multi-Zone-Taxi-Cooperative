@@ -8,10 +8,12 @@ import pooproyect.Menus.MenuOperadores.MenuGestionConductores;
 import pooproyect.Menus.MenuOperadores.MenuGestionVial;
 import pooproyect.Menus.MenuOperadores.MenuOperedores;
 import pooproyect.Solicitudes.CrearSolicitud;
+import pooproyect.Solicitudes.SolicitudEnEspera;
 import pooproyect.Usuario.Cliente;
 import pooproyect.Zona.Conexiones;
 import pooproyect.Zona.GestorConexionesRutas;
 import pooproyect.Zona.GestorZonas;
+import pooproyect.operador.Operador;
 
 public class SystemUI {
 
@@ -23,16 +25,19 @@ public class SystemUI {
    public SystemUI() {
     GestorZonas gestorZonas = new GestorZonas();
     GestorConexionesRutas gestorConexiones = new GestorConexionesRutas(gestorZonas);
+    GestorConductores gestorConductores = new GestorConductores();
+    SolicitudEnEspera solicitudesEnEspera = new SolicitudEnEspera(gestorConductores, gestorConexiones, gestorZonas);
     Cliente cliente = new Cliente("", "CLI-1");
     Conexiones conexiones = new Conexiones(0, 0);
-    CrearSolicitud crearSolicitud = new CrearSolicitud(conexiones, gestorZonas, cliente);
+    CrearSolicitud crearSolicitud = new CrearSolicitud(conexiones, gestorZonas, cliente, solicitudesEnEspera);
+    Operador operador = new Operador("Operador Principal", 1, solicitudesEnEspera);
 
     MenuGestionVial menuGesVial = new MenuGestionVial(gestorZonas, gestorConexiones);
-    MenuGestionConductores menuGesConductores = new MenuGestionConductores(new GestorConductores());
+    MenuGestionConductores menuGesConductores = new MenuGestionConductores(gestorConductores);
 
-    this.menuOperadores = new MenuOperedores(menuGesVial, menuGesConductores);
+    this.menuOperadores = new MenuOperedores(menuGesVial, menuGesConductores, operador, solicitudesEnEspera, gestorConductores);
     this.menuConductores = new MenuConductores();
-    this.menuCliente = new MenuCliente(crearSolicitud);
+    this.menuCliente = new MenuCliente(crearSolicitud, solicitudesEnEspera);
 }
 
     public void iniciar() {

@@ -22,6 +22,8 @@ public class Conductor extends Usuario {
         servicios.add(taxi);
     }
 
+
+
     public boolean puedeAtender(String tipoServicio) {
         for (Taxi servicio : servicios) {
             if (servicio.getTipoServicio().equalsIgnoreCase(tipoServicio)) {
@@ -57,6 +59,14 @@ public class Conductor extends Usuario {
 
       public ArrayList<Taxi> getServicios() {
         return servicios;
+    }
+
+     public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
    public String toString() {
