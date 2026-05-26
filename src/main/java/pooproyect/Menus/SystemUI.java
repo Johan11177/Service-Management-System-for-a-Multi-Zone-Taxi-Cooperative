@@ -7,6 +7,7 @@ import pooproyect.Main.EntradaUsuario;
 import pooproyect.Menus.MenuOperadores.MenuGestionConductores;
 import pooproyect.Menus.MenuOperadores.MenuGestionVial;
 import pooproyect.Menus.MenuOperadores.MenuOperedores;
+import pooproyect.Reportes.GestorReportes;
 import pooproyect.Solicitudes.CrearSolicitud;
 import pooproyect.Usuario.Cliente;
 import pooproyect.Zona.Conexiones;
@@ -26,12 +27,13 @@ public class SystemUI {
     Cliente cliente = new Cliente("", "CLI-1");
     Conexiones conexiones = new Conexiones(0, 0);
     CrearSolicitud crearSolicitud = new CrearSolicitud(conexiones, gestorZonas, cliente);
+    GestorReportes gestorReportes = new GestorReportes();
 
     MenuGestionVial menuGesVial = new MenuGestionVial(gestorZonas, gestorConexiones);
     MenuGestionConductores menuGesConductores = new MenuGestionConductores(new GestorConductores());
 
     this.menuOperadores = new MenuOperedores(menuGesVial, menuGesConductores);
-    this.menuConductores = new MenuConductores();
+    this.menuConductores = new MenuConductores(gestorReportes);
     this.menuCliente = new MenuCliente(crearSolicitud);
 }
 
