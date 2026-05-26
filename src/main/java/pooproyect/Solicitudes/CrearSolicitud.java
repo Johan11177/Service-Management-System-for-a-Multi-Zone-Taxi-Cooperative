@@ -87,10 +87,10 @@ public class CrearSolicitud {
         solicitud.setNombreCliente(nombre);
         solicitudEnEspera.agregarSolicitud(solicitud);
 
-        System.out.println("\n✓ Solicitud registrada con ID: " + idSolicitud);
-        System.out.println("✓ Tipo de servicio: " + tipoServicio);
-        System.out.println("✓ Zona de origen: " + nombreOrigen);
-        System.out.println("✓ Zona de destino: " + nombreDestino);
+        System.out.println("\n Solicitud registrada con ID: " + idSolicitud);
+        System.out.println(" Tipo de servicio: " + tipoServicio);
+        System.out.println(" Zona de origen: " + nombreOrigen);
+        System.out.println(" Zona de destino: " + nombreDestino);
     }
 
     public String getNombreClienteActual() {

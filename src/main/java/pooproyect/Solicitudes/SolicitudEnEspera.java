@@ -84,7 +84,7 @@ public class SolicitudEnEspera {
 
         System.out.println("=== MIS SOLICITUDES ATENDIDAS ===");
         for (Solicitudes s : atendidas) {
-            System.out.println("\n✓ ID: " + s.getIDsolicitud());
+            System.out.println("\nID: " + s.getIDsolicitud());
             System.out.println("  De: " + s.getZonaDeorigen() + " → A: " + s.getZonaDestino());
             System.out.println("  Conductor: " + s.getNombreConductor());
             System.out.println("  Placa: " + s.getPlacaVehiculo());

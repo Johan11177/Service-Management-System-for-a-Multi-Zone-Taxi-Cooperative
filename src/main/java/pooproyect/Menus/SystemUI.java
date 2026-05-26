@@ -7,6 +7,7 @@ import pooproyect.Main.EntradaUsuario;
 import pooproyect.Menus.MenuOperadores.MenuGestionConductores;
 import pooproyect.Menus.MenuOperadores.MenuGestionVial;
 import pooproyect.Menus.MenuOperadores.MenuOperedores;
+import pooproyect.Reportes.GestorReportes;
 import pooproyect.Solicitudes.CrearSolicitud;
 import pooproyect.Solicitudes.SolicitudEnEspera;
 import pooproyect.Usuario.Cliente;
@@ -22,22 +23,47 @@ public class SystemUI {
     private MenuConductores menuConductores;
     private MenuCliente menuCliente;
 
-   public SystemUI() {
+ public SystemUI() {
+
     GestorZonas gestorZonas = new GestorZonas();
     GestorConexionesRutas gestorConexiones = new GestorConexionesRutas(gestorZonas);
     GestorConductores gestorConductores = new GestorConductores();
-    SolicitudEnEspera solicitudesEnEspera = new SolicitudEnEspera(gestorConductores, gestorConexiones, gestorZonas);
+
+    SolicitudEnEspera solicitudesEnEspera =
+            new SolicitudEnEspera(gestorConductores, gestorConexiones, gestorZonas);
+
     Cliente cliente = new Cliente("", "CLI-1");
+
     Conexiones conexiones = new Conexiones(0, 0);
-    CrearSolicitud crearSolicitud = new CrearSolicitud(conexiones, gestorZonas, cliente, solicitudesEnEspera);
-    Operador operador = new Operador("Operador Principal", 1, solicitudesEnEspera);
 
-    MenuGestionVial menuGesVial = new MenuGestionVial(gestorZonas, gestorConexiones);
-    MenuGestionConductores menuGesConductores = new MenuGestionConductores(gestorConductores);
+    CrearSolicitud crearSolicitud =
+            new CrearSolicitud(conexiones, gestorZonas, cliente, solicitudesEnEspera);
 
-    this.menuOperadores = new MenuOperedores(menuGesVial, menuGesConductores, operador, solicitudesEnEspera, gestorConductores);
-    this.menuConductores = new MenuConductores();
-    this.menuCliente = new MenuCliente(crearSolicitud, solicitudesEnEspera);
+    Operador operador =
+            new Operador("Operador Principal", 1, solicitudesEnEspera);
+
+    GestorReportes gestorReportes = new GestorReportes();
+
+    MenuGestionVial menuGesVial =
+            new MenuGestionVial(gestorZonas, gestorConexiones);
+
+    MenuGestionConductores menuGesConductores =
+            new MenuGestionConductores(gestorConductores);
+
+    this.menuOperadores =
+            new MenuOperedores(
+                    menuGesVial,
+                    menuGesConductores,
+                    operador,
+                    solicitudesEnEspera,
+                    gestorConductores
+            );
+
+    this.menuConductores =
+            new MenuConductores(gestorReportes);
+
+    this.menuCliente =
+            new MenuCliente(crearSolicitud, solicitudesEnEspera);
 }
 
     public void iniciar() {

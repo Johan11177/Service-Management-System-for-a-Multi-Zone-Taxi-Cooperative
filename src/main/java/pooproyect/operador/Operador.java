@@ -26,7 +26,7 @@ public class Operador {
     }
     
     public void CancelarSolicitud(int idSolicitud){
-        System.out.println("\n\n\n");
+        System.out.println("\n");
         System.out.print("Ingrese el motivo de la cancelación (por operador): ");
         String motivo = sc.nextLine();
         MotivosCancelacion motivoRegistro = new MotivosCancelacion(idSolicitud, motivo, this.nombre);
@@ -34,7 +34,7 @@ public class Operador {
     }
 
     public ArrayList<Solicitudes> ListarSolicitudesEnEspera(){
-        System.out.println("\n\n\n");
+        System.out.println("\n");
         ArrayList<Solicitudes> lista = solicitudesEnEspera.getCola();
         if (lista.isEmpty()) {
             System.out.println("No hay solicitudes en espera.");
