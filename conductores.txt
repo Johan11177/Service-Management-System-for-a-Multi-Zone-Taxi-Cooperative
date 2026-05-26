@@ -1,6 +1,4 @@
 Samuel ;C-1;chevrolet;c12;
-<<<<<<< HEAD
 Michael ;C-2;Toyota;c1ksdksk2;
-=======
-Michael ;C-2;ferrari;c13;
->>>>>>> d606e6af95bd92be55382610753c32007dcc8b3d
+Michael ;C-3;ferrari;c13;
+

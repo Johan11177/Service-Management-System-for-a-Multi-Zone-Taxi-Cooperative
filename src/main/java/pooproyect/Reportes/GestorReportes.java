@@ -59,10 +59,12 @@ public class GestorReportes {
         } catch (IOException e) {
             System.out.println("Error al cargar reportes: " + e.getMessage());
         }
-    }
+    }   
+
+}      
         
         
-    }
+    
 
     
 

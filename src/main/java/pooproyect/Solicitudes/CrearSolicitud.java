@@ -37,9 +37,9 @@ public class CrearSolicitud {
         }
         String tipoServicio;
 
-        if (opcionTipo == 1) {
+        if (op== 1) {
             tipoServicio = "Taxi Estandar";
-        } else if (opcionTipo == 2) {
+        } else if (op == 2) {
             tipoServicio = "Taxi con Baul";
         } else {
             tipoServicio = "Taxi Transporte Mascotas";
