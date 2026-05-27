@@ -1,0 +1,2 @@
+sam;C-1;toyota;123-kjs;false;Taxi Estandar,Taxi con Baul,Taxi Transporte Mascotas
+lubo;C-2;Toyota;234-jkl;true;Taxi Estandar,Taxi con Baul,Taxi Transporte Mascotas

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor Cliente
+actor Operador
+actor Conductor
+
+rectangle "Sistema de Gestión de Servicios" {
+  usecase "Hacer solicitud" as UC_HacerSolicitud
+  usecase "Ver solicitudes atendidas" as UC_VerAtendidas
+  usecase "Cancelar solicitud" as UC_CancelarSolicitud
+
+  usecase "Ver solicitudes en espera" as UC_VerEspera
+  usecase "Atender siguiente solicitud" as UC_AtenderSiguiente
+  usecase "Finalizar servicio" as UC_FinalizarServicio
+  usecase "Ver historial de solicitudes" as UC_VerHistorial
+  usecase "Gestionar conductores" as UC_GestionarConductores
+  usecase "Gestionar conexiones viales" as UC_GestionarConexiones
+
+  usecase "Hacer reporte" as UC_HacerReporte
+}
+
+Cliente --> UC_HacerSolicitud
+Cliente --> UC_VerAtendidas
+Cliente --> UC_CancelarSolicitud
+
+Operador --> UC_VerEspera
+Operador --> UC_AtenderSiguiente
+Operador --> UC_FinalizarServicio
+Operador --> UC_VerHistorial
+Operador --> UC_GestionarConductores
+Operador --> UC_GestionarConexiones
+
+Conductor --> UC_HacerReporte
+
+@enduml

@@ -1,0 +1,629 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Conductor {
+  -vehiculo: Vehiculo
+  -disponible: boolean
+  -servicios: ArrayList<Taxi> = new ArrayList<>()
+  --
+  +Conductor(nombre: String, ID: String, vehiculo: Vehiculo)
+  +agregarServicio(taxi: Taxi): void
+  +puedeAtender(tipoServicio: String): boolean
+  +getNombre(): String
+  +getID(): String
+  +setNombre(nombre: String): void
+  +setID(ID: String): void
+  +getVehiculo(): Vehiculo
+  +setVehiculo(vehiculo: Vehiculo): void
+  +getServicios(): ArrayList<Taxi>
+  +isDisponible(): boolean
+  +setDisponible(disponible: boolean): void
+  +toString(): String
+}
+
+class GestorConductores {
+  -sc: Scanner = EntradaUsuario.get()
+  -disponible: boolean
+  -conductores: ArrayList<Conductor>
+  --
+  +GestorConductores()
+  +agregarConductor(): void
+  +MostrarConductores(): void
+  +habilitarServicioConductor(): void
+  +ocuparConductor(): void
+  +liberarConductor(): void
+  +encontrarConductorDisponible(tipoServicio: String): Conductor
+  +finalizarServicioConductor(idConductor: String): boolean
+  +getConductores(): ArrayList<Conductor>
+  +toString(): String
+}
+
+class PersistenciaConductores {
+  -{static} ARCHIVO: String = "conductores.txt"
+  --
+  +{static} guardar(conductores: ArrayList<Conductor>): void
+  +{static} cargar(): ArrayList<Conductor>
+}
+
+class CancelacionIndebidaException {
+  +CancelacionIndebidaException(idSolicitud: int)
+}
+
+class ConductorNoHabilitadoException {
+  +ConductorNoHabilitadoException(tipoServicio: String)
+}
+
+class DatosIncompletosException {
+  +DatosIncompletosException(campo: String)
+}
+
+class SinConectividadVialException {
+  +SinConectividadVialException(origen: String, destino: String)
+}
+
+class SolicitudInvalidaException {
+  +SolicitudInvalidaException(mensaje: String)
+}
+
+class ZonaInexistenteException {
+  +ZonaInexistenteException(nombreZona: String)
+}
+
+class HistorialSolicitudes {
+  -registros: ArrayList<RegistroHistorial>
+  --
+  +HistorialSolicitudes()
+  +agregarRegistro(registro: RegistroHistorial): void
+  +mostrarHistorial(): void
+  +getRegistros(): ArrayList<RegistroHistorial>
+}
+
+class RegistroHistorial {
+  -idSolicitud: int
+  -nombreCliente: String
+  -zonaDeorigen: String
+  -zonaDestino: String
+  -tipoServicio: String
+  -nombreConductor: String
+  -idConductor: String
+  -placaVehiculo: String
+  -tarifaFinal: double
+  -tiempoEstimado: int
+  -estado: String
+  -fecha: String
+  -hora: String
+  --
+  +RegistroHistorial(idSolicitud: int, nombreCliente: String, zonaDeorigen: String, zonaDestino: String, tipoServicio: String, nombreConductor: String, idConductor: String, placaVehiculo: String, tarifaFinal: double, tiempoEstimado: int, estado: String, fecha: String, hora: String)
+  +getIdSolicitud(): int
+  +getNombreCliente(): String
+  +getZonaDeorigen(): String
+  +getZonaDestino(): String
+  +getTipoServicio(): String
+  +getNombreConductor(): String
+  +getIdConductor(): String
+  +getPlacaVehiculo(): String
+  +getTarifaFinal(): double
+  +getTiempoEstimado(): int
+  +getEstado(): String
+  +getFecha(): String
+  +getHora(): String
+  +toString(): String
+}
+
+class EntradaUsuario {
+  -{static} sc: Scanner = new Scanner(System.in)
+  --
+  -EntradaUsuario()
+  +{static} get(): Scanner
+}
+
+interface InterfaceMenu {
+  +CrearMenu(): void
+}
+
+class MenuCliente {
+  -s: CrearSolicitud
+  -solicitudesEnEspera: SolicitudEnEspera
+  -sc: Scanner = EntradaUsuario.get()
+  --
+  +MenuCliente(s: CrearSolicitud, solicitudesEnEspera: SolicitudEnEspera)
+  +CrearMenu(): void
+  +getS(): CrearSolicitud
+}
+
+class MenuConductores {
+  -sc: Scanner = EntradaUsuario.get()
+  -gestorReportes: GestorReportes
+  --
+  +MenuConductores(gestorReportes: GestorReportes)
+  +CrearMenu(): void
+}
+
+class MenuGestionConductores {
+  -gestorConductores: GestorConductores
+  -sc: Scanner = EntradaUsuario.get()
+  --
+  +MenuGestionConductores(gestorConductores: GestorConductores)
+  +CrearMenu(): void
+}
+
+class MenuGestionVial {
+  -gestorZonas: GestorZonas
+  -gestorConexiones: GestorConexionesRutas
+  -sc: Scanner = EntradaUsuario.get()
+  --
+  +MenuGestionVial(gestorZonas: GestorZonas, gestorConexiones: GestorConexionesRutas)
+  +CrearMenu(): void
+}
+
+class MenuOperedores {
+  -sc: Scanner = EntradaUsuario.get()
+  -menuGesVial: MenuGestionVial
+  -menuGesConductores: MenuGestionConductores
+  -operador: Operador
+  -solicitudesEnEspera: SolicitudEnEspera
+  -gestorConductores: GestorConductores
+  --
+  +MenuOperedores(menuGesVial: MenuGestionVial, menuGesConductores: MenuGestionConductores, operador: Operador, solicitudesEnEspera: SolicitudEnEspera, gestorConductores: GestorConductores)
+  +CrearMenu(): void
+}
+
+class SystemUI {
+  -sc: Scanner = EntradaUsuario.get()
+  -menuOperadores: MenuOperedores
+  -menuConductores: MenuConductores
+  -menuCliente: MenuCliente
+  -solicitudesEnEspera: SolicitudEnEspera
+  -gestorConexiones: GestorConexionesRutas
+  --
+  +SystemUI()
+  +iniciar(): void
+}
+
+class Operador {
+  -nombre: String
+  -id: int
+  -solicitudesEnEspera: SolicitudEnEspera
+  -sc: Scanner = EntradaUsuario.get()
+  --
+  +Operador(nombre: String, id: int, solicitudesEnEspera: SolicitudEnEspera)
+  +AtenderSiguiente(): void
+  +CancelarSolicitud(idSolicitud: int): void
+  +ListarSolicitudesEnEspera(): ArrayList<Solicitudes>
+  +getNombre(): String
+  +getID(): int
+}
+
+class GestorPersistencia {
+  +{static} cargarTodo(solicitudesEnEspera: SolicitudEnEspera, gestorConexiones: GestorConexionesRutas): void
+  +{static} guardarTodo(solicitudesEnEspera: SolicitudEnEspera, gestorConexiones: GestorConexionesRutas): void
+}
+
+class PersistenciaRedVial {
+  -{static} ARCHIVO: String = "red_vial.txt"
+  --
+  +{static} guardarEstado(conexiones: ArrayList<Conexiones>): void
+  +{static} cargarEstado(conexiones: ArrayList<Conexiones>): void
+}
+
+class PersistenciaSolicitudes {
+  -{static} BASE_DIR: Path = initBaseDir()
+  -{static} ARCHIVO_HISTORIAL: String = BASE_DIR.resolve("historial.txt").toString()
+  -{static} ARCHIVO_COLA: String = BASE_DIR.resolve("cola.txt").toString()
+  -{static} SEPARADOR: String = "|"
+  --
+  -{static} initBaseDir(): Path
+  +{static} guardarHistorial(historial: ArrayList<Solicitudes>): void
+  +{static} cargarHistorial(): ArrayList<Solicitudes>
+  +{static} guardarCola(cola: ArrayList<Solicitudes>): void
+  +{static} cargarCola(): ArrayList<Solicitudes>
+  +{static} serializar(s: Solicitudes): String
+  +{static} cargarDesdeArchivo(archivo: String): ArrayList<Solicitudes>
+  +{static} nvl(v: String): String
+}
+
+class GestorReportes {
+  -{static} ARCHIVO: String = "reportes.txt"
+  -reportes: ArrayList<Reporte> = new ArrayList<>()
+  --
+  +GestorReportes()
+  +agregarReportes(motivo: String): void
+  +mostrarReportes(): void
+  +guardar(): void
+  +cargar(): void
+}
+
+class Reporte {
+  -motivo: String
+  --
+  +Reporte(motivo: String)
+  +getMotivo(): String
+  +toString(): String
+}
+
+abstract class Servicio {
+  #nombre: String
+  #tarifa: Tarifa
+  --
+  +Servicio(nombre: String, tarifa: Tarifa)
+  +getNombre(): String
+  +getTarifa(): Tarifa
+  +toString(): String
+}
+
+class CrearSolicitud {
+  -gestorZonas: GestorZonas
+  -conexiones: Conexiones
+  -cliente: Cliente
+  -solicitudEnEspera: SolicitudEnEspera
+  -sc: Scanner = EntradaUsuario.get()
+  -nombreClienteActual: String
+  --
+  +CrearSolicitud(conexiones: Conexiones, gestorZonas: GestorZonas, cliente: Cliente, solicitudEnEspera: SolicitudEnEspera)
+  +crearSolicitud(): void
+  +getNombreClienteActual(): String
+}
+
+class MotivosCancelacion {
+  -idSolicitud: int
+  -motivo: String
+  -fechaCancelacion: String
+  -horaCancelacion: String
+  -nombreCliente: String
+  --
+  +MotivosCancelacion(idSolicitud: int, motivo: String, nombreCliente: String)
+  +getIdSolicitud(): int
+  +getMotivo(): String
+  +getFechaCancelacion(): String
+  +getHoraCancelacion(): String
+  +getNombreCliente(): String
+  +toString(): String
+}
+
+class SolicitudEnEspera {
+  -cola: ArrayList<Solicitudes>
+  -historial: ArrayList<Solicitudes>
+  -motivos: ArrayList<MotivosCancelacion>
+  -gestorConductores: GestorConductores
+  -gestorConexiones: GestorConexionesRutas
+  -gestorZonas: GestorZonas
+  -siguienteId: int
+  --
+  +SolicitudEnEspera()
+  +SolicitudEnEspera(gestorConductores: GestorConductores, gestorConexiones: GestorConexionesRutas, gestorZonas: GestorZonas)
+  +setGestorConductores(gestorConductores: GestorConductores): void
+  +generarIdSolicitud(): int
+  +mostrarHistorial(): void
+  +mostrarSolicitudesAtendidas(): void
+  +setGestorConexiones(gestorConexiones: GestorConexionesRutas): void
+  +setGestorZonas(gestorZonas: GestorZonas): void
+  +agregarSolicitud(s: Solicitudes): void
+  +agregarSolicitud(s: Solicitudes, persistir: boolean): void
+  +atenderSolicitud(operadorNombre: String, operadorId: int): Solicitudes
+  +buscarIdZona(nombreZona: String): int
+  +crearTarifaPorTipo(tipoServicio: String, dijkstra: Dijkstra): Tarifa
+  +cancelarSolicitud(id: int, motivoRegistro: MotivosCancelacion): void
+  +getCola(): ArrayList<Solicitudes>
+  +getMotivos(): ArrayList<MotivosCancelacion>
+  +getHistorial(): ArrayList<Solicitudes>
+  +agregarAlHistorial(s: Solicitudes): void
+  +getSiguienteId(): int
+  +setSiguienteId(id: int): void
+}
+
+class Solicitudes {
+  -IDsolicitud: int
+  -zonaDeorigen: String
+  -ZonaDestino: String
+  -TipoDeServicio: String
+  -Hora: String
+  -Fecha: String
+  -EstadoSolicitud: String
+  -motivoCancelacion: String
+  -nombreCliente: String
+  -nombreConductor: String
+  -idConductor: String
+  -placaVehiculo: String
+  -tarifaEstimada: double
+  -tiempoEstimado: int
+  --
+  +Solicitudes(iDsolicitud: int, zonaDeorigen: String, zonaDestino: String, tipoDeServicio: String, hora: String, fecha: String)
+  +getIDsolicitud(): int
+  +setIDsolicitud(iDsolicitud: int): void
+  +getZonaDeorigen(): String
+  +setZonaDeorigen(zonaDeorigen: String): void
+  +getZonaDestino(): String
+  +setZonaDestino(zonaDestino: String): void
+  +getTipoDeServicio(): String
+  +setTipoDeServicio(tipoDeServicio: String): void
+  +getHora(): String
+  +setHora(hora: String): void
+  +getFecha(): String
+  +setFecha(fecha: String): void
+  +getEstadoSolicitud(): String
+  +setEstadoSolicitud(estadoSolicitud: String): void
+  +getMotivoCancelacion(): String
+  +setMotivoCancelacion(motivo: String): void
+  +getNombreCliente(): String
+  +setNombreCliente(nombreCliente: String): void
+  +getNombreConductor(): String
+  +setNombreConductor(nombreConductor: String): void
+  +getIdConductor(): String
+  +setIdConductor(idConductor: String): void
+  +getPlacaVehiculo(): String
+  +setPlacaVehiculo(placaVehiculo: String): void
+  +getTarifaEstimada(): double
+  +setTarifaEstimada(tarifa: double): void
+  +getTiempoEstimado(): int
+  +setTiempoEstimado(tiempo: int): void
+  +toString(): String
+}
+
+abstract class FabricaTarifas {
+  +crearTarifa(tipo: String): Tarifa
+}
+
+class FabricaTarifasEspecial {
+  -dijkstra: Dijkstra
+  --
+  +FabricaTarifasEspecial(dijkstra: Dijkstra)
+  +crearTarifa(tipo: String): Tarifa
+}
+
+class FabricaTarifasNormal {
+  -dijkstra: Dijkstra
+  --
+  +FabricaTarifasNormal(dijkstra: Dijkstra)
+  +crearTarifa(tipo: String): Tarifa
+}
+
+interface Tarifa {
+  ~CalcularTarifa(origen: int, destino: int): double
+}
+
+class TarifaBaul {
+  -dijkstra: Dijkstra
+  -CostoBase: double = 5000
+  -CostoPorKm: double = 1000
+  -CostoAdicionalBaul: double = 2000
+  -Costofinal: double
+  --
+  +TarifaBaul(dijkstra: Dijkstra, costoBase: double, costoPorKm: double, costoAdicionalBaul: double)
+  +TarifaBaul(dijkstra: Dijkstra)
+  +CalcularTarifa(origen: int, destino: int): double
+}
+
+class TarifaEstandar {
+  -dijkstra: Dijkstra
+  -CostoBase: double = 5000
+  -CostoPorKm: double = 1000
+  --
+  +TarifaEstandar(dijkstra: Dijkstra, costoBase: double, costoPorKm: double)
+  +TarifaEstandar(dijkstra: Dijkstra)
+  +CalcularTarifa(origen: int, destino: int): double
+}
+
+class TarifaMascotas {
+  -dijkstra: Dijkstra
+  -CostoBase: double = 5000
+  -CostoPorKm: double = 1000
+  -CostoAdicionalMascotas: double = 3000
+  -Costofinal: double
+  --
+  +TarifaMascotas(dijkstra: Dijkstra, costoBase: double, costoPorKm: double, costoAdicionalMascotas: double)
+  +TarifaMascotas(dijkstra: Dijkstra)
+  +CalcularTarifa(origen: int, destino: int): double
+}
+
+abstract class Taxi {
+  -tipoServicio: String
+  --
+  +Taxi(tipoServicio: String)
+  +getTipoServicio(): String
+}
+
+class TaxiConBaul {
+  +TaxiConBaul()
+}
+
+class TaxiEstandar {
+  +TaxiEstandar()
+}
+
+class TaxiTransporteMascotas {
+  +TaxiTransporteMascotas()
+}
+
+class Cliente {
+  +Cliente(nombre: String, ID: String)
+  +CancelarServicio(): void
+}
+
+class Usuario {
+  -nombre: String
+  -ID: String
+  --
+  +Usuario(nombre: String, ID: String)
+  +getID(): String
+  +getNombre(): String
+  +setID(ID: String): void
+  +setNombre(nombre: String): void
+}
+
+class Vehiculo {
+  -marca: String
+  -placa: String
+  --
+  +Vehiculo(marca: String, placa: String)
+  +getMarca(): String
+  +getPlaca(): String
+  +setMarca(marca: String): void
+  +setPlaca(placa: String): void
+}
+
+class BFS {
+  -matriz: int
+  --
+  +BFS(matriz: int[][])
+  +hayConexion(origen: int, destino: int): boolean
+}
+
+class Conexiones {
+  -origen: Zonas
+  -destino: Zonas
+  -idOrigen: int
+  -idDestino: int
+  -Habilitada: boolean
+  -tiempoEstimado: int
+  -kiloMetros: double
+  --
+  +Conexiones(origen: Zonas, destino: Zonas, Habilitada: boolean, tiempoEstimado: int, kiloMetros: double)
+  +Conexiones(idOrigen: int, idDestino: int)
+  +getOrigen(): Zonas
+  +setOrigen(origen: Zonas): void
+  +getDestino(): Zonas
+  +setDestino(destino: Zonas): void
+  +getIdOrigen(): int
+  +setIdOrigen(idOrigen: int): void
+  +getIdDestino(): int
+  +setIdDestino(idDestino: int): void
+  +isHabilitada(): boolean
+  +setHabilitada(habilitada: boolean): void
+  +getTiempoEstimado(): int
+  +setTiempoEstimado(tiempoEstimado: int): void
+  +getKiloMetros(): double
+  +setKiloMetros(kiloMetros: double): void
+}
+
+class Dijkstra {
+  -matriz: int
+  --
+  +Dijkstra(matriz: int[][])
+  +calcularRutaMasCorta(origen: int, destino: int): int
+  -obtenerNodoMenorDistancia(distancias: int[], visitados: boolean[]): int
+}
+
+class GestorConexionesRutas {
+  -sc: Scanner = EntradaUsuario.get()
+  -conexiones: ArrayList<Conexiones>
+  -gestorZonas: GestorZonas
+  --
+  +GestorConexionesRutas(gestorZonas: GestorZonas)
+  +GestorConexionesRutas()
+  +AgregarConexiones(): void
+  +MostrarConexiones(): void
+  +HabilitarDeshabilitarConexion(): void
+  +getConexiones(): ArrayList<Conexiones>
+  +getGestorZonas(): GestorZonas
+}
+
+class GestorZonas {
+  -zonas: ArrayList<Zonas>
+  --
+  +GestorZonas()
+  +AgregarZonas(): void
+  +MostrarZonas(): void
+  +getZonas(): ArrayList<Zonas>
+}
+
+abstract class Grafo {
+  #matriz: int
+  #rutas: GestorConexionesRutas
+  --
+  +Grafo(rutas: GestorConexionesRutas)
+  +construirGrafo(): void
+  +getMatriz(): int[][]
+}
+
+class GrafoKilometros {
+  +GrafoKilometros(rutas: GestorConexionesRutas)
+  +construirGrafo(): void
+}
+
+class GrafoTiempo {
+  +GrafoTiempo(rutas: GestorConexionesRutas)
+  +construirGrafo(): void
+}
+
+class Zonas {
+  -idZona: int
+  -nombreZona: String
+  --
+  +Zonas(idZona: int, nombreZona: String)
+  +Zonas()
+  +getIdZona(): int
+  +setIdZona(idZona: int): void
+  +getNombreZona(): String
+  +setNombreZona(nombreZona: String): void
+}
+
+Conductor --|> Usuario
+Conductor *-- Vehiculo
+Conductor o-- Taxi
+GestorConductores o-- Conductor
+HistorialSolicitudes o-- RegistroHistorial
+MenuCliente ..|> InterfaceMenu
+MenuCliente *-- CrearSolicitud
+MenuCliente *-- SolicitudEnEspera
+MenuConductores ..|> InterfaceMenu
+MenuConductores *-- GestorReportes
+MenuGestionConductores ..|> InterfaceMenu
+MenuGestionConductores *-- GestorConductores
+MenuGestionVial ..|> InterfaceMenu
+MenuGestionVial *-- GestorZonas
+MenuGestionVial *-- GestorConexionesRutas
+MenuOperedores ..|> InterfaceMenu
+MenuOperedores *-- MenuGestionVial
+MenuOperedores *-- MenuGestionConductores
+MenuOperedores *-- Operador
+MenuOperedores *-- SolicitudEnEspera
+MenuOperedores *-- GestorConductores
+SystemUI *-- MenuOperedores
+SystemUI *-- MenuConductores
+SystemUI *-- MenuCliente
+SystemUI *-- SolicitudEnEspera
+SystemUI *-- GestorConexionesRutas
+Operador *-- SolicitudEnEspera
+GestorPersistencia ..> SolicitudEnEspera
+GestorPersistencia ..> GestorConexionesRutas
+PersistenciaSolicitudes ..> Solicitudes
+GestorReportes o-- Reporte
+Servicio --> Tarifa
+CrearSolicitud *-- GestorZonas
+CrearSolicitud *-- Conexiones
+CrearSolicitud *-- Cliente
+CrearSolicitud *-- SolicitudEnEspera
+SolicitudEnEspera o-- Solicitudes
+SolicitudEnEspera o-- MotivosCancelacion
+SolicitudEnEspera *-- GestorConductores
+SolicitudEnEspera *-- GestorConexionesRutas
+SolicitudEnEspera *-- GestorZonas
+SolicitudEnEspera ..> Dijkstra
+SolicitudEnEspera ..> Tarifa
+FabricaTarifas ..> Tarifa
+FabricaTarifasEspecial --|> FabricaTarifas
+FabricaTarifasEspecial *-- Dijkstra
+FabricaTarifasEspecial ..> Tarifa
+FabricaTarifasNormal --|> FabricaTarifas
+FabricaTarifasNormal *-- Dijkstra
+FabricaTarifasNormal ..> Tarifa
+TarifaBaul ..|> Tarifa
+TarifaBaul *-- Dijkstra
+TarifaEstandar ..|> Tarifa
+TarifaEstandar *-- Dijkstra
+TarifaMascotas ..|> Tarifa
+TarifaMascotas *-- Dijkstra
+TaxiConBaul --|> Taxi
+TaxiEstandar --|> Taxi
+TaxiTransporteMascotas --|> Taxi
+Cliente --|> Usuario
+Conexiones *-- Zonas
+GestorConexionesRutas o-- Conexiones
+GestorConexionesRutas *-- GestorZonas
+GestorZonas o-- Zonas
+Grafo o-- GestorConexionesRutas
+GrafoKilometros --|> Grafo
+GrafoKilometros ..> GestorConexionesRutas
+GrafoTiempo --|> Grafo
+GrafoTiempo ..> GestorConexionesRutas
+@enduml
